@@ -268,12 +268,12 @@ export default function FormBuilder() {
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {isMobileView && (
-        <button
+        <Button
           onClick={() => setShowToolbox(!showToolbox)}
           className="fixed bottom-4 right-4 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg"
         >
           {showToolbox ? '✕' : '🧰'}
-        </button>
+        </Button>
       )}
       {(showToolbox || !isMobileView) && (
         <div
@@ -321,7 +321,7 @@ export default function FormBuilder() {
                     className="px-3 py-1 rounded border text-sm"
                   />
                 ) : (
-                  <button
+                  <Button
                     onClick={() => setActiveSection(section.id)}
                     onDoubleClick={() => {
                       setEditingSectionId(section.id);
@@ -334,30 +334,30 @@ export default function FormBuilder() {
                     }`}
                   >
                     {section.name}
-                  </button>
+                  </Button>
                 )}
-                <button
+                <Button
                   onClick={() => toggleSectionCollapse(section.id)}
                   className="absolute right-2 -top-2 text-sm text-gray-500 hover:text-black"
                 >
                   {section.collapsed ? '➕' : '➖'}
-                </button>
+                </Button>
               </div>
             ))}
           </div>
           <div className="flex ml-auto gap-2">
-            <button
+            <Button
               onClick={() => setPreviewMode(!previewMode)}
               className="ml-auto bg-yellow-600 text-white px-2 h-10 rounded text-sm md:text-base"
             >
               {previewMode ? '🛠 Back to Builder' : '👁 Preview'}
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => setShowJson(true)}
               className="bg-gray-700 text-white px-2 rounded h-10 text-sm md:text-base"
             >
               📋 Show JSON
-            </button>
+            </Button>
           </div>
         </div>
         {!previewMode ? (
@@ -368,13 +368,13 @@ export default function FormBuilder() {
                 <div key={row.id} className="mb-6">
                   <div className="flex justify-between items-center mb-2">
                     {/* <h3 className="text-sm font-medium text-gray-500">Row: {row.id}</h3> */}
-                    <button
+                    <Button
                       className="text-xs px-2 py-1 bg-green-600 text-white rounded"
                       disabled={row.columns.length >= 3}
                       onClick={() => addNewColumn(row.id)}
                     >
                       + Column
-                    </button>
+                    </Button>
                   </div>
                   <div className="flex flex-col md:flex-row gap-4">
                     {row.columns.map((col) => {
@@ -435,13 +435,13 @@ export default function FormBuilder() {
                               items={col.fields.map((f) => f.id)}
                               strategy={verticalListSortingStrategy}
                             >
-                              <button
+                              <Button
                                 onClick={() => deleteColumn(row.id, col.id)}
                                 className="absolute top-1 right-0 text-xs text-red-500 hover:text-red-700 group-hover:block z-10 bg-white rounded-full px-1"
                                 title="Delete column"
                               >
                                 ❌
-                              </button>
+                              </Button>
                               <DroppableColumn
                                 id={`drop-${col.id}`}
                                 rowId={row.id}
@@ -469,12 +469,12 @@ export default function FormBuilder() {
                   </div>
                 </div>
               ))}
-            <button
+            <Button
               onClick={addNewRow}
               className="bg-green-700 text-white px-4 py-2 rounded"
             >
               + Add Row
-            </button>
+            </Button>
           </>
         ) : (
           <>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import Skeleton from './Skeleton';
 import { useDelete } from '../hooks/useDelete';
+import { Button } from '@salesforce/design-system-react';
 
 function FormListing() {
   const navigate = useNavigate();
@@ -37,16 +38,15 @@ function FormListing() {
           <h1 className="text-xl md:text-2xl font-semibold mb-2 md:mb-0">
             Forms
           </h1>
-          <button
+          <Button
+            label="Create Form"
             onClick={() =>
               navigate('/forms/new', {
                 state: { create: true },
               })
             }
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition text-sm"
-          >
-            Create Form
-          </button>
+            // className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition text-sm"
+          />
         </div>
         {loading && (
           <div className="mt-6 px-4">
@@ -76,38 +76,35 @@ function FormListing() {
                     </td>
                     <td className="px-4 py-3 text-center">
                       <div className="flex flex-wrap justify-end gap-2">
-                        <button
-                          type="button"
+                        <Button
+                          label="View"
+                          variant=""
                           onClick={() =>
                             navigate(`/forms/${form.id}`, {
                               state: { preview: true, form },
                             })
                           }
-                          className="inline-block bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium py-1 px-3 rounded-md transition"
-                        >
-                          View
-                        </button>
-                        <button
-                          type="button"
+                          // className="inline-block bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium py-1 px-3 rounded-md transition"
+                        />
+                        <Button
+                          label="Edit"
+                          variant=""
                           onClick={() =>
                             navigate(`/forms/${form.id}/edit`, {
                               state: { preview: false, form },
                             })
                           }
-                          className="inline-block bg-amber-200 hover:bg-amber-300 text-amber-900 font-medium py-1 px-3 rounded-md transition"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
+                          // className="inline-block bg-amber-200 hover:bg-amber-300 text-amber-900 font-medium py-1 px-3 rounded-md transition"
+                        />
+                        <Button
+                          label="Delete"
+                          variant=""
                           onClick={() => {
                             setSelectedForm(form);
                             setShowDeleteModal(true);
                           }}
-                          className="inline-block bg-red-400 hover:bg-red-500 text-white font-medium py-1 px-3 rounded-md transition"
-                        >
-                          Delete
-                        </button>
+                          // className="inline-block bg-red-400 hover:bg-red-500 text-white font-medium py-1 px-3 rounded-md transition"
+                        />
                       </div>
                     </td>
                   </tr>
@@ -131,18 +128,16 @@ function FormListing() {
             </h2>
             <p className="mb-6 text-gray-600"></p>
             <div className="flex justify-center space-x-3">
-              <button
+              <Button
+                label="Cancel"
                 onClick={() => setShowDeleteModal(false)}
-                className="px-4 py-2 w-20 text-base font-semibold bg-gray-300 hover:bg-gray-400 rounded"
-              >
-                Cancel
-              </button>
-              <button
+                // className="px-4 py-2 w-20 text-base font-semibold bg-gray-300 hover:bg-gray-400 rounded"
+              />
+              <Button
+                label="Yes"
                 onClick={handleDelete}
-                className="px-4 py-2 w-20 text-base font-semibold bg-red-500 hover:bg-red-600 text-white rounded"
-              >
-                Yes
-              </button>
+                // className="px-4 py-2 w-20 text-base font-semibold bg-red-500 hover:bg-red-600 text-white rounded"
+              />
             </div>
           </div>
         </div>

@@ -16,6 +16,7 @@ import { usePut } from '../hooks/usePut';
 import { usePost } from '../hooks/usePost';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
+import { Button, Input } from '@salesforce/design-system-react';
 
 export default function FormBuilderViewEdit() {
   const location = useLocation();
@@ -703,12 +704,12 @@ export default function FormBuilderViewEdit() {
         </div>
       )}
       {isMobileView && (
-        <button
+        <Button
           onClick={() => setShowToolbox(!showToolbox)}
           className="fixed bottom-4 right-4 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg"
         >
           {showToolbox ? '✕' : '🧰'}
-        </button>
+        </Button>
       )}
       {(showToolbox || !isMobileView) && !previewMode && (
         <div
@@ -736,13 +737,15 @@ export default function FormBuilderViewEdit() {
         <div className="mb-4 border-b border-gray-300 pb-4">
           <div className="flex justify-between items-center flex-wrap gap-4">
             <div className="flex items-center">
-              <label htmlFor="form-name" className="text-sm font-semibold mr-2">
+              {/* <label htmlFor="form-name" className="text-sm font-semibold mr-2">
                 Form Name :
-              </label>
+              </label> */}
               {!isPreview ? (
-                <input
+                <Input
                   id="form-name"
-                  type="text"
+                  // type="text"
+                  label="Form Name :"
+                  required={true}
                   value={formMetadata.form_name}
                   onChange={(e) =>
                     setFormMetadata((prev) => ({
@@ -751,12 +754,12 @@ export default function FormBuilderViewEdit() {
                     }))
                   }
                   placeholder="Enter form name"
-                  className="border px-3 py-1.5 rounded text-sm"
+                  // className="border px-3 py-1.5 rounded text-sm"
                 />
               ) : (
-                <span className="px-3 py-1 bg-gray-100 rounded w-full md:w-1/3 text-sm text-gray-700">
-                  {formMetadata.form_name}
-                </span>
+                // <span className="px-3 py-1 bg-gray-100 rounded w-full md:w-1/3 text-sm text-gray-700">
+                <Input disabled value={formMetadata.form_name} />
+                // </span>
               )}
             </div>
             <div className="flex items-center">
@@ -798,27 +801,27 @@ export default function FormBuilderViewEdit() {
               )}
             </div>
             <div className="flex gap-2 ml-auto">
-              <button
+              <Button
                 onClick={() => setPreviewMode(!previewMode)}
                 className={`${
                   location.state?.preview ? 'hidden' : ''
                 } bg-yellow-600 text-white px-3 py-1.5 rounded text-sm md:text-base`}
               >
                 {previewMode ? 'Back to Builder' : 'Preview'}
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => setShowJson(true)}
                 className="bg-gray-700 text-white px-3 py-1.5 rounded text-sm md:text-base hidden"
               >
                 📋 Show JSON
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleCancelForm}
                 className="bg-gray-500 text-white px-4 py-1.5 rounded hover:bg-gray-600 text-sm md:text-base"
               >
                 {location.state?.preview ? 'Back' : 'Cancel'}
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={
                   !previewMode || !mode
                     ? handleSaveForm
@@ -827,7 +830,7 @@ export default function FormBuilderViewEdit() {
                 className="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 text-sm md:text-base"
               >
                 Save
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -857,7 +860,7 @@ export default function FormBuilderViewEdit() {
                       className="px-3 py-1 rounded border text-sm"
                     />
                   ) : (
-                    <button
+                    <Button
                       onClick={() => setActiveSection(section.id)}
                       onDoubleClick={() => {
                         setEditingSectionId(section.id);
@@ -870,21 +873,21 @@ export default function FormBuilderViewEdit() {
                       }`}
                     >
                       {section.section_name}
-                    </button>
+                    </Button>
                   )}
-                  <button
+                  <Button
                     onClick={() => deleteSection(section.id)}
                     className="text-red-600 text-sm hover:text-red-700 mr-2 mt-4"
                     title="Delete section"
                   >
                     ❌
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     onClick={() => toggleSectionCollapse(section.id)}
                     className="absolute right-[14px] -top-0 text-sm text-gray-500 hover:text-black"
                   >
                     {section.is_collapsable ? '➕' : '➖'}
-                  </button>
+                  </Button>
                 </div>
               ))}
             </div>
@@ -898,13 +901,13 @@ export default function FormBuilderViewEdit() {
               ?.rows.map((row) => (
                 <div key={row.id} className="mb-6">
                   <div className="flex justify-between items-center mb-2">
-                    <button
+                    <Button
                       className="text-xs px-2 py-1 bg-green-600 text-white rounded"
                       disabled={row.columns.length >= 3}
                       onClick={() => addNewColumn(row.id)}
                     >
                       + Column
-                    </button>
+                    </Button>
                   </div>
                   <div className="flex flex-col md:flex-row gap-4">
                     {row.columns.map((col) => {
@@ -965,13 +968,13 @@ export default function FormBuilderViewEdit() {
                               items={col.fields.map((f) => f.id)}
                               strategy={verticalListSortingStrategy}
                             >
-                              <button
+                              <Button
                                 onClick={() => deleteColumn(row.id, col.id)}
                                 className="absolute top-1 right-0 text-xs text-red-500 hover:text-red-700 group-hover:block z-10 bg-white rounded-full px-1"
                                 title="Delete column"
                               >
                                 ❌
-                              </button>
+                              </Button>
                               <DroppableColumn
                                 id={`drop-${col.id}`}
                                 rowId={row.id}
@@ -1004,12 +1007,12 @@ export default function FormBuilderViewEdit() {
                   </div>
                 </div>
               ))}
-            <button
+            <Button
               onClick={addNewRow}
               className="bg-green-700 text-white px-4 py-2 rounded"
             >
               + Add Row
-            </button>
+            </Button>
           </>
         ) : (
           <>

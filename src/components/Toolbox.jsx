@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Button } from '@salesforce/design-system-react';
 
 export default function Toolbox({
   onDragStart,
@@ -22,12 +23,12 @@ export default function Toolbox({
       {isMobileView && onClose && (
         <div className="flex justify-between items-center mb-4">
           <h2 className="font-medium text-base">Fields</h2>
-          <button
+          <Button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
           >
             ✕
-          </button>
+          </Button>
         </div>
       )}
       {!isMobileView && <h2 className="font-medium text-base mb-2">Fields</h2>}
@@ -58,12 +59,12 @@ export default function Toolbox({
           </div>
         ))}
       </div>
-      <button
+      <Button
         className="mt-auto bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors"
         onClick={onAddSection}
       >
         + Add Section
-      </button>
+      </Button>
     </div>
   );
 }

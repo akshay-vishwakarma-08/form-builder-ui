@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
+import { Button } from '@salesforce/design-system-react';
 
 export default function JsonModal({ sections, onClose, fieldValues }) {
   const structure = {
-    submitApiRoute: "/api/form-submit",
+    submitApiRoute: '/api/form-submit',
     sections: sections.map((section) => ({
       sectionName: section.name,
       collapsable: true,
@@ -12,8 +13,8 @@ export default function JsonModal({ sections, onClose, fieldValues }) {
         columns: row.columns.map((col) => ({
           fields: col.fields.map((field) => ({
             type: field.type || field.id,
-            label: field.label || "",
-            placeholder: field.placeholder || "",
+            label: field.label || '',
+            placeholder: field.placeholder || '',
             required: field.required || false,
             value: fieldValues[field.id] ?? '',
           })),
@@ -32,18 +33,18 @@ export default function JsonModal({ sections, onClose, fieldValues }) {
           value={JSON.stringify(structure, null, 2)}
         />
         <div className="flex justify-end space-x-2 mt-4">
-          <button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose}>
+          <Button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose}>
             Close
-          </button>
-          <button
+          </Button>
+          <Button
             className="px-4 py-2 bg-blue-600 text-white rounded"
             onClick={() => {
               navigator.clipboard.writeText(JSON.stringify(structure, null, 2));
-              alert("Copied to clipboard!");
+              alert('Copied to clipboard!');
             }}
           >
             Copy JSON
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -1,1 +1,2 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import '@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css';

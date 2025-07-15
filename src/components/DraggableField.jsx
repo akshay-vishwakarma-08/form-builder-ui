@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { Button } from '@salesforce/design-system-react';
 
 export default function DraggableField({ field, onClick, onDelete }) {
   const {
@@ -24,15 +25,15 @@ export default function DraggableField({ field, onClick, onDelete }) {
       style={style}
       className="relative p-2 bg-white rounded-lg mb-2 cursor-pointer"
     >
-      <button
+      <Button
         onClick={(e) => {
           e.stopPropagation();
           onDelete();
         }}
-        className="absolute top-1 right-1 text-xs text-red-500 hover:text-red-700 group-hover:block"
+        // className="absolute top-1 right-1 text-xs text-red-500 hover:text-red-700 group-hover:block"
       >
         ❌
-      </button>
+      </Button>
       <div onClick={onClick} className="pr-4">
         {`${field.label} (${field.field_type})`}
       </div>

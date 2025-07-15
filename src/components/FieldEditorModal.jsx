@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from '@salesforce/design-system-react';
 
 export default function FieldEditorModal({ field, onClose, onSave }) {
   const [localField, setLocalField] = useState({
@@ -54,15 +55,15 @@ export default function FieldEditorModal({ field, onClose, onSave }) {
           }
         />
         <div className="flex justify-end space-x-2">
-          <button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose}>
+          <Button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose}>
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
             className="px-4 py-2 bg-blue-600 text-white rounded"
             onClick={handleSave}
           >
             Save
-          </button>
+          </Button>
         </div>
       </div>
     </div>

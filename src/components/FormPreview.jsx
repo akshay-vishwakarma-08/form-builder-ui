@@ -1,4 +1,5 @@
 import React from 'react';
+import { Input, Checkbox, Radio, Icon } from '@salesforce/design-system-react';
 
 export default function FormPreview({
   sections,
@@ -65,14 +66,17 @@ function renderField(
     case 'text':
       return (
         <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          {/* <label className="block text-sm font-medium text-gray-700 mb-1">
             {config.label}
             {config.required && <span className="text-red-500 ml-1">*</span>}
           </label>
           <input
-            type="text"
+            type="text" */}
+          <Input
+            label={config.label}
+            required={config.required}
             placeholder={`Enter ${config.label}`}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none transition-colors"
+            // className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none transition-colors"
             value={
               fieldValues?.[field.db_column_name] ??
               tableData?.data?.[0]?.[field.db_column_name] ??
@@ -121,29 +125,31 @@ function renderField(
       );
     case 'number':
       return (
-        <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {config.label}
-            {config.required && <span className="text-red-500 ml-1">*</span>}
-          </label>
-          <input
-            type="number"
-            placeholder={`Enter ${config.label}`}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none transition-colors"
-            value={
-              fieldValues?.[field.db_column_name] ??
-              tableData?.data?.[0]?.[field.db_column_name] ??
-              ''
-            }
-            onChange={(e) =>
-              handleFieldInputChange(
-                field.id,
-                field.db_column_name,
-                e.target.value
-              )
-            }
-          />
-        </div>
+        // <div className="relative">
+        //   <label className="block text-sm font-medium text-gray-700 mb-1">
+        //     {config.label}
+        //     {config.required && <span className="text-red-500 ml-1">*</span>}
+        //   </label>
+        <Input
+          // type="number"
+          label={config.label}
+          required={config.required}
+          placeholder={`Enter ${config.label}`}
+          // className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none transition-colors"
+          value={
+            fieldValues?.[field.db_column_name] ??
+            tableData?.data?.[0]?.[field.db_column_name] ??
+            ''
+          }
+          onChange={(e) =>
+            handleFieldInputChange(
+              field.id,
+              field.db_column_name,
+              e.target.value
+            )
+          }
+        />
+        // </div>
       );
     case 'date':
       return (
@@ -191,10 +197,12 @@ function renderField(
       return (
         <div className="flex items-center py-2">
           <div className="flex items-center h-5">
-            <input
+            <Radio
               id={field.id}
-              type="radio"
-              className="size-4 text-blue-600 border-gray-300 rounded"
+              label={config.label}
+              required={config.required}
+              // type="radio"
+              // className="size-4 text-blue-600 border-gray-300 rounded"
               checked={fieldValues[field.db_column_name] || ''}
               onChange={(e) =>
                 handleFieldInputChange(
@@ -205,13 +213,13 @@ function renderField(
               }
             />
           </div>
-          <label
+          {/* <label
             htmlFor={field.id}
             className="ml-2 block text-sm text-gray-700"
           >
             {config.label}
             {config.required && <span className="text-red-500 ml-1">*</span>}
-          </label>
+          </label> */}
         </div>
       );
     default:
