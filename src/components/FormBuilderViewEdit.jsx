@@ -16,6 +16,7 @@ import { usePut } from '../hooks/usePut';
 import { usePost } from '../hooks/usePost';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
+import { generateHTMLWithCSS } from '../utils/GenerateHTML';
 
 export default function FormBuilderViewEdit() {
   const location = useLocation();
@@ -589,6 +590,8 @@ export default function FormBuilderViewEdit() {
       }));
     }
 
+    const htmlString = generateHTMLWithCSS(sections);
+    console.log('htmlString', htmlString);
     const formDataToSave = {
       form_name: formMetadata.form_name,
       table_name: formMetadata.table_name,
