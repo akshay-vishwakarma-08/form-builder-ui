@@ -693,6 +693,49 @@ export default function FormBuilderViewEdit() {
         return 'w-full';
     }
   };
+
+  //SSR
+  const exportHTMLFromServer = async () => {
+    const transformedSections = sections.map((section) => ({
+      section_name: section.section_name,
+      rows: section.rows.map((row) => ({
+        columns: row.columns.map((col) => ({
+          fields: col.fields,
+        })),
+      })),
+    }));
+
+    try {
+      const response = await fetch(
+        'http://localhost:8000/api/v1/export-html/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sections: transformedSections }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to export form');
+      }
+
+      // Handle download
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'form.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Error exporting HTML:', err);
+      alert('There was a problem exporting the form.');
+    }
+  };
+
+  //SSr
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {successMessage && (
@@ -830,6 +873,12 @@ export default function FormBuilderViewEdit() {
                 className="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 text-sm md:text-base"
               >
                 Save
+              </button>
+              <button
+                onClick={exportHTMLFromServer}
+                className="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 text-sm md:text-base"
+              >
+                Export Form (ssr)
               </button>
             </div>
           </div>
